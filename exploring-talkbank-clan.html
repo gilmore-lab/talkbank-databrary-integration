@@ -307,7 +307,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Exploring TalkBank &amp; CLAN</h1>
 <h4 class="author">Rick O. Gilmore</h4>
-<h4 class="date">2019-06-18 08:52:24</h4>
+<h4 class="date">2019-06-18 09:35:37</h4>
 
 </div>
 
@@ -317,7 +317,7 @@ div.tocify {
 <p>This document provides information about current functions of TalkBank and CLAN.</p>
 <div id="terminology" class="section level2">
 <h2>Terminology</h2>
-<p><em>TalkBank</em>: Collection of databases hosted at &lt;talkbank.org&gt;. <em>CHAT</em>: Data format for transcripts. <em>CLAN</em>: Child Language ANalysis program.</p>
+<p><em>TalkBank</em>: Collection of databases hosted at &lt;talkbank.org&gt;. <em>CHAT</em>: Data format for transcripts. <em>CLAN</em>: Child Language ANalysis program. Its XML schema is described here: <a href="https://talkbank.org/software/xsddoc/index.html" class="uri">https://talkbank.org/software/xsddoc/index.html</a>.</p>
 </div>
 </div>
 <div id="talkbank" class="section level1">
@@ -365,10 +365,65 @@ Screenshot from Providence corpus session from TalkBank
 <h2>Acquire data</h2>
 <p>Let’s use the Databrary API commands to acquire and clean the data prior to opening them in CLAN.</p>
 <p><strong>This fails with HTTP 403 error.</strong> So, I downloaded the files manually to <code>~/Downloads</code>.</p>
-<p>Let’s test whether the video can be rendered directly from Databrary:</p>
+<p>However, let’s test whether the video can be rendered directly from Databrary:</p>
 <pre class="r"><code>source(&quot;R/write_video_clip_html.R&quot;)</code></pre>
 <pre class="r"><code>write_video_clip_html(vid_url=&quot;https://nyu.databrary.org/slot/6648/0,3308467/asset/12339/download?inline=true&quot;)</code></pre>
 <p></br> <video width="320" height="240" controls> <source src="https://nyu.databrary.org/slot/6648/0,3308467/asset/12339/download?inline=true" type="video/mp4"> </video> </br> <a href="https://nyu.databrary.org/slot/6648/0,3308467/asset/12339/download?inline=true" class="uri">https://nyu.databrary.org/slot/6648/0,3308467/asset/12339/download?inline=true</a></p>
+<p>This works, so the problem with accessing the video from the <code>databraryapi</code> package is specific to that code.</p>
+</div>
+<div id="open-clan" class="section level2">
+<h2>Open CLAN</h2>
+<p>CLAN’s <em>analysis</em> programs can be run from the command line, but I will use the GUI for now. I created a folder with the <code>*.cha</code> and <code>*.mp4</code> with the name <code>90-6648</code> referring to the Databrary volume and session. I opened CLAN and set the <code>working</code> directory via the <code>Commands</code> window:</p>
+<div class="figure">
+<img src="img/CLAN-command.jpg" alt="CLAN Commands window" width="25%" />
+<p class="caption">
+CLAN Commands window
+</p>
+</div>
+<p>I then selected and opened the <code>*.cha</code> transcript from the <code>File/Open...</code> menu.</p>
+<div class="figure">
+<img src="img/CHAT-transcript.jpg" alt="CHAT transcript" width="25%" />
+<p class="caption">
+CHAT transcript
+</p>
+</div>
+<p>To link the media (video) file, I open the <code>Walker Controller</code> window from the <code>Windows/Walker Controller</code> menu item.</p>
+<div class="figure">
+<img src="img/CLAN-walker-controller.jpg" alt="CLAN Walker Controller" width="25%" />
+<p class="caption">
+CLAN Walker Controller
+</p>
+</div>
+<p>Then, I click on the <code>open media</code> button in the <code>Walker Controller</code> window and select the <code>*.mp4</code> file from the file browser. When the video opens, it opens in a <code>Movie - Sound</code> window that looks like this:</p>
+<div class="figure">
+<img src="img/CLAN-movie-sound.jpg" alt="CLAN Movie Sound" width="25%" />
+<p class="caption">
+CLAN Movie Sound
+</p>
+</div>
+<p>When I press <code>F6</code> to play the video, I get a warning pop-up:</p>
+<div class="figure">
+<img src="img/CLAN-warning.jpg" alt="CLAN Warning" width="25%" />
+<p class="caption">
+CLAN Warning
+</p>
+</div>
+<p>Note that in the CHAT transcript header, there is the following line: <code>@Media:  lil01, video</code>. CLAN needs the video file to be named <code>lil01*</code> for this to work.</p>
+<p>For expediency, I’ll just copy the file and rename it to <code>lil01.mp4</code>. I then click on the <code>open media</code> button in the <code>Walker Controller</code> window again, select <code>lil01.mp4</code>, and when the window opens, try <code>F6</code> again.</p>
+<p>The video and audio play, but the transcript highlighting is <em>not</em> working for some reason. Steps to try:</p>
+<ul>
+<li>Try with media + CHAT file from TalkBank to see whether the Databrary file is corrupted somehow.</li>
+<li>Redownload CLAN.</li>
+</ul>
+<div id="download-from-talkbank" class="section level3">
+<h3>Download from TalkBank</h3>
+<p>Here is a downloadable link to the (apparently zipped) transcripts: <a href="https://phonbank.talkbank.org/data/Eng-NA/Providence.zip" class="uri">https://phonbank.talkbank.org/data/Eng-NA/Providence.zip</a></p>
+<p>And here is a link to the media/video files: <a href="https://media.talkbank.org/phonbank/Eng-NA/Providence/" class="uri">https://media.talkbank.org/phonbank/Eng-NA/Providence/</a>.</p>
+<p>This is the relevant media file for this example:</p>
+<p><a href="https://media.talkbank.org/phonbank/Eng-NA/Providence/Lily/010102.mp4" class="uri">https://media.talkbank.org/phonbank/Eng-NA/Providence/Lily/010102.mp4</a>.</p>
+<p>I created a new <code>providence</code> folder on my desktop and put the <code>010102.mp4</code> and <code>010102.cha</code> files in it. Note that web downloads from TalkBank have some of the similar file name issues we have on Databrary. Wait, this <code>*.cha</code> file has the right media file name. The media file loads, and <code>F6</code> plays it, but there is no utterance highlighting again. So, the problem is <em>not</em> with the files from Databrary.</p>
+<p>I’m going to stop here on 2019-06-18-09:35 to switch to some other projects.</p>
+</div>
 </div>
 </div>
 
