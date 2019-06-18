@@ -168,6 +168,25 @@ Wait, this `*.cha` file has the right media file name.
 The media file loads, and `F6` plays it, but there is no utterance highlighting again.
 So, the problem is *not* with the files from Databrary.
 
+# Comparing TalkBank and Databrary
+
+Here is the representation of the Providence corpus on TalkBank:
+
+<iframe src="https://phonbank.talkbank.org/access/Eng-NA/Providence.html" width=800>
+</iframe>
+
+<https://phonbank.talkbank.org/access/Eng-NA/Providence.html>
+
+
+And here is the representation on Databrary:
+
+<iframe src="https://nyu.databrary.org/volume/90#panel-data" width=800>
+</iframe>
+
+<http://doi.org/10.17910/B7B885>
+
+There are many similarities.
+
 I'm going to stop here on 2019-06-18-09:35 to switch to some other projects.
 
 
